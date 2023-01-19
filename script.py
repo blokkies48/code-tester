@@ -1,4 +1,5 @@
-sample_string = "google.com" * 100000
+sample_string = "google.com" * 1000000
+
 sd_2 = {}
 
 for charactor in sample_string:

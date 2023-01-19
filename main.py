@@ -4,6 +4,13 @@
 
 import subprocess
 import time
+
+# Clean up script files:
+with open("script.py", "w") as f2:
+    f2.write("")
+
+with open("script_2.py", "w") as f2:
+    f2.write("")
 # Testing the 2 blocks algorithm
 def check_time():
     # Test script 1
@@ -11,6 +18,7 @@ def check_time():
 
     cmd = "python script.py"
     p= subprocess.Popen(cmd, shell=True)
+    out,err = p.communicate()
 
     end_time = time.time()
     print(end_time - start_time)
@@ -22,6 +30,7 @@ def check_time():
 
     cmd = "python script_2.py"
     p= subprocess.Popen(cmd, shell=True)
+    out,err = p.communicate()
 
     end_time = time.time()
     time_2 = end_time - start_time
