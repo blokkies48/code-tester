@@ -1,5 +1,7 @@
 
 
+"""Run this file"""
+
 import subprocess
 import time
 # Testing the 2 blocks algorithm
