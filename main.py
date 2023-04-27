@@ -18,7 +18,7 @@ def check_time():
 
     cmd = "python script.py"
     p= subprocess.Popen(cmd, shell=True)
-    out,err = p.communicate()
+    p.communicate()
 
     end_time = time.time()
     print(end_time - start_time)
@@ -30,7 +30,7 @@ def check_time():
 
     cmd = "python script_2.py"
     p= subprocess.Popen(cmd, shell=True)
-    out,err = p.communicate()
+    p.communicate()
 
     end_time = time.time()
     time_2 = end_time - start_time
