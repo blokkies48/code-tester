@@ -1,94 +1,48 @@
+from Models.UI_model import UI_tk
+from View.logic import * 
 
+from threading import Thread
+import os
 
-"""Run this file"""
+def get_input(screen:UI_tk):
 
-import subprocess
-import time
+    clean_files()
 
-# Clean up script files:
-with open("script.py", "w") as f2:
-    f2.write("")
+    output_message = list()
+    directory = "scripts"
 
-with open("script_2.py", "w") as f2:
-    f2.write("")
-# Testing the 2 blocks algorithm
-def check_time():
-    # Test script 1
-    start_time = time.time()
+    screen.lbl.config(text = "")
+    screen.lbl_status.config(text = f"Processing...")
 
-    cmd = "python script.py"
-    p= subprocess.Popen(cmd, shell=True)
-    p.communicate()
+    inputs= list(screen.get_text_inputs())
 
-    end_time = time.time()
-    print(end_time - start_time)
+    count = 1
 
-    time_1 = end_time - start_time
+    for index, filename in enumerate(os.listdir(directory)):
+        print(filename)
 
-    # Test script 2
-    start_time = time.time()
+        inp = inputs[index].get(1.0, "end-1c")
+        with open(f"{directory}\\{filename}", "w") as f1:
+            f1.write(inp)
 
-    cmd = "python script_2.py"
-    p= subprocess.Popen(cmd, shell=True)
-    p.communicate()
-
-    end_time = time.time()
-    time_2 = end_time - start_time
-    print(end_time - start_time)
-
-    return time_1, time_2
-
-
-# App interface
-
-import tkinter as tk
-  
-# Top level window
-
-frame = tk.Tk()
-frame.title("TextBox Input")
-
-# logic for running
-def printInput():
-    inp = inputtxt.get(1.0, "end-1c")
-    with open("script.py", "w") as f2:
-        f2.write(inp)
-
-    inp_2 = inputtxt_2.get(1.0, "end-1c")
-    with open("script_2.py", "w") as f2:
-        f2.write(inp_2)
-
-    times = check_time()
-    fastest = ''
-    if times[0] < times[1]:
-        fastest = "First code is the fastest"
-    else:
-        fastest = "Second code is the fastest"
-    lbl.config(text = f"First Time: {times[0]}\nSecond Time {times[1]}\n {fastest}" )
+        time_1 = check_time_script(filename)
+        output_message.append(f"time {index + 1}: {time_1}")
+        screen.lbl.config(text = "\n".join(output_message))
+        count += 1
     
-# UI
-lbl_1 = tk.Label(frame, text = "Please note syntax isn't checked and can affect result.\nCopy past python code and compare.")
-lbl_1.pack()
-  
-# TextBox Creation
-inputtxt = tk.Text(frame,
-                   height = 15,
-                   width = 60)
+    screen.lbl_status.config(text = f"Done!")
 
-inputtxt_2 = tk.Text(frame,
-                   height = 15,
-                   width = 60)
-  
-inputtxt.pack()
-inputtxt_2.pack()
-  
-# Button Creation
-printButton = tk.Button(frame,
-                        text = "Run", 
-                        command = printInput)
-printButton.pack()
-  
-# Label Creation
-lbl = tk.Label(frame, text = "")
-lbl.pack()
-frame.mainloop()
+
+def run_thread(screen:UI_tk):
+    
+    thread = Thread(target=get_input, args=(screen,))
+    thread.start()    
+
+def main():   
+    screen = UI_tk("Please note syntax isn't checked and can affect result.\nCopy past python code and compare.")
+
+    screen.button_run(run_thread, is_lambda=True, arg=screen)
+
+    screen.run()
+    
+main()
