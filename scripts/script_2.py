@@ -16,7 +16,7 @@ def func():
 func()
 
 str_1 = ""
-for i in range(100):
+for i in range(100000000):
     str_1 += "1"
 
 exit()

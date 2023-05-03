@@ -36,7 +36,6 @@ class __UI_buttons:
                             width=self.WIDTH, height=self.HEIGHT)
         button.pack(padx=self.PADX, pady=self.PADY, side='right')
 
-
 class UI_tk(__UI_buttons):
     frame = tk.Tk()
     frame.title("Code Tester 3000")
@@ -48,7 +47,6 @@ class UI_tk(__UI_buttons):
         lbl_1 = tk.Label(self.frame, text=top_label)
         lbl_1.pack()
         
-        # TextBox Creation
         self.text_input_1 = tk.Text(self.frame,
                         height = self.TEXT_HEIGHT,
                         width = self.TEXT_WIDTH)
@@ -60,7 +58,7 @@ class UI_tk(__UI_buttons):
         self.text_input_1.pack()
         self.text_input_2.pack()
         
-        # Label Creation
+
         self.lbl_note = tk.Label(self.frame, text = "Please note: Times out after 10s")
         self.lbl_note.pack()
 
@@ -69,8 +67,6 @@ class UI_tk(__UI_buttons):
         
         self.lbl_status = tk.Label(self.frame, text = "")
         self.lbl_status.pack()
-
-        
 
     def get_text_inputs(self):
         return self.text_input_1, self.text_input_2
