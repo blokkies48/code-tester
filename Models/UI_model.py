@@ -46,6 +46,19 @@ class __UI_buttons:
                                 width=self.WIDTH, height=self.HEIGHT)
         button.pack(padx=self.PADX, pady=self.PADY, side=self.SIDE)
 
+    def cancel_process(self, command, is_lambda=False, arg=None):
+        if is_lambda:
+            button = tk.Button(self.frame,
+                                text="Cancel", 
+                                command=lambda: command(arg),
+                                width=self.WIDTH, height=self.HEIGHT)
+        else:
+            button = tk.Button(self.frame,
+                                text="Cancel", 
+                                command=command,
+                                width=self.WIDTH, height=self.HEIGHT)
+        button.pack(padx=self.PADX, pady=self.PADY, side='right')
+
 
 class UI_tk(__UI_buttons):
     frame = tk.Tk()
