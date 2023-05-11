@@ -9,7 +9,7 @@ code takes about 0.06 seconds to run without any values
 So if your code is in that range then it is optimal.
 
 
-![Image while processing](https://github.com/blokkies48/code-tester/blob/master/images/processing%20code.jpg)
+![App UI](https://github.com/blokkies48/code-tester/blob/master/images/shared%20variables.jpg)
 ### Image while processing.
 
 ![Image of results](https://github.com/blokkies48/code-tester/blob/master/images/Displaying%20code%20speeds.jpg)
