@@ -8,6 +8,8 @@ from threading import Thread
 import time
 import os
 
+from shared import *
+
 thread:Thread = None
 
 def thread_code():
@@ -19,7 +21,7 @@ def func():
     thread.daemon = True
     thread.start()
 func()
-
+{}
 {}
 
 exit()
@@ -63,28 +65,34 @@ class TheProcesses(BaseProgram):
         screen.lbl_status.config(text = f"Processing...")
 
         inputs= list(screen.get_text_inputs())
+        shared_variables:str = ''
 
-        for index, filename in enumerate(list_name):
+        with open(f'{directory}\\shared.py', 'w') as shared:
+            shared.write(inputs[2].get(1.0, "end-1c"))
 
-            inp = inputs[index].get(1.0, "end-1c")
-            with open(f"{directory}\\{filename}", "w") as f1:
-                f1.write(TEMP.format(inp))
+        def main_scripts():
+            for index, filename in enumerate(list_name):
 
-            self.is_cancelled = False
-            time_1 = self.check_time_script(filename)
+                inp = inputs[index].get(1.0, "end-1c")
+                with open(f"{directory}\\{filename}", "w") as f1:
+                    f1.write(TEMP.format(shared_variables, inp))
 
-            if time_1 > 10 and not self.is_cancelled:
-                self.output_message.append(f"Timed out")
-            elif not self.is_cancelled:
-                self.output_message.append(f"Timed")
+                self.is_cancelled = False
+                time_1 = self.check_time_script(filename)
 
-            self.output_message.append(f"time {index + 1}: {time_1}")
-            screen.lbl.config(text = "\n".join(self.output_message))
-        self.is_running = False
+                if time_1 > 10 and not self.is_cancelled:
+                    self.output_message.append(f"Timed out")
+                elif not self.is_cancelled:
+                    self.output_message.append(f"Timed")
 
-        screen.lbl_status.config(text = f"Done!")
+                self.output_message.append(f"time {index + 1}: {time_1}")
+                screen.lbl.config(text = "\n".join(self.output_message))
+            self.is_running = False
 
-        self.has_thread = False
+            screen.lbl_status.config(text = f"Done!")
+
+            self.has_thread = False
+        main_scripts()
 
 class TheButtons(BaseProgram):
     def run_thread(self, screen:UI_tk):

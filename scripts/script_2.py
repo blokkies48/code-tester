@@ -3,6 +3,8 @@ from threading import Thread
 import time
 import os
 
+from shared import *
+
 thread:Thread = None
 
 def thread_code():
@@ -15,8 +17,12 @@ def func():
     thread.start()
 func()
 
-str_1 = ""
-for i in range(100000000):
-    str_1 += "1"
+print("second", str_1)
+
+for i in range(value):
+	str_1 += 1
+	
+
+
 
 exit()

@@ -40,13 +40,23 @@ class UI_tk(__UI_buttons):
     frame = tk.Tk()
     frame.title("Code Tester 3000")
 
-    TEXT_HEIGHT = 20
+    TEXT_HEIGHT = 15
     TEXT_WIDTH = 70
 
     def __init__(self, top_label):
         lbl_1 = tk.Label(self.frame, text=top_label)
         lbl_1.pack()
+
+        lbl_2 = tk.Label(self.frame, text="Shared Variables")
+        lbl_2.pack()
         
+        self.shared_variables = tk.Text(self.frame,
+                        height = 7,
+                        width = self.TEXT_WIDTH)
+        
+        lbl_3 = tk.Label(self.frame, text="Code Here")
+        
+
         self.text_input_1 = tk.Text(self.frame,
                         height = self.TEXT_HEIGHT,
                         width = self.TEXT_WIDTH)
@@ -55,6 +65,10 @@ class UI_tk(__UI_buttons):
                         height = self.TEXT_HEIGHT,
                         width = self.TEXT_WIDTH)
         
+        self.shared_variables.pack()
+
+        lbl_3.pack()
+
         self.text_input_1.pack()
         self.text_input_2.pack()
         
@@ -69,11 +83,12 @@ class UI_tk(__UI_buttons):
         self.lbl_status.pack()
 
     def get_text_inputs(self):
-        return self.text_input_1, self.text_input_2
+        return self.text_input_1, self.text_input_2, self.shared_variables
     
     def clear_text_boxes(self):
         self.text_input_1.delete('1.0',tk.END)
         self.text_input_2.delete('1.0',tk.END)
+        self.shared_variables.delete('1.0',tk.END)
 
     def run(self):
         self.frame.mainloop()
