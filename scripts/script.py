@@ -17,11 +17,11 @@ def func():
     thread.start()
 func()
 
-print("first", str_1)
 
 
 for i in range(value):
-	str_1 += 1
+	num_1 += i
+	
 
 
 
